@@ -34,9 +34,10 @@ class CatalogActivity : AppCompatActivity() {
         if (catalog.hasRepairService) {
             val alertBuilder = AlertDialog.Builder(this)
             alertBuilder.setTitle("Ремонт телефонов")
-                .setMessage("Вашему телефону требуется ремонт?")
+                .setMessage("Вашему телефону требуется ремонт (стоимость ремонта: 10000 рублей)?")
                 .setPositiveButton("Да") { dialog, which ->
                     dialog.dismiss()
+                    spentMoney += 10000
                     val builder = AlertDialog.Builder(this)
                         .setTitle("Ремонт телефонов")
                         .setMessage("Ваше устройство отремонтировано")
