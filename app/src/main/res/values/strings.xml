@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Сеть магазинов по продаже телефонов</string>
+    <string name="tv_choosing_city">Выбирите ваш город</string>
+    <string name="btn_exit">Выйти</string>
+</resources>
