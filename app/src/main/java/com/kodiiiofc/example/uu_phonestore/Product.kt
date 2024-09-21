@@ -1,6 +1,10 @@
 package com.kodiiiofc.example.uu_phonestore
 
-data class Product(val name: String, var price: Int, var selled: Int = 0)
+data class Product(val name: String, var price: Int, var selled: Int = 0) {
+    override fun toString(): String {
+        return "$name. \nЦена: $price руб."
+    }
+}
 
 val baseCatalog: MutableList<Product> = mutableListOf(
     Product("iPhone 16 128GB", 114_990),
