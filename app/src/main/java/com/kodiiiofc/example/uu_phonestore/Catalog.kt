@@ -1,11 +1,13 @@
 package com.kodiiiofc.example.uu_phonestore
 
-class Catalog(
+import java.io.Serializable
+
+class Catalog (
     val city: String,
     val baseProductList: List<Product>,
     var multiplyingFactor: Double = 1.0,
     var hasRepairService: Boolean = false
-) {
+) : Serializable {
 
     var products: List<Product> = listOf()
 

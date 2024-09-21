@@ -1,19 +1,20 @@
 package com.kodiiiofc.example.uu_phonestore
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class CatalogActivity : AppCompatActivity() {
 
     private lateinit var statisticBTN: Button
     private lateinit var productsLV: ListView
+    private var spentMoney = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,22 +40,45 @@ class CatalogActivity : AppCompatActivity() {
                     val builder = AlertDialog.Builder(this)
                         .setTitle("Ремонт телефонов")
                         .setMessage("Ваше устройство отремонтировано")
-                        .setPositiveButton("ОК") {dialog, which -> dialog.dismiss()}
+                        .setPositiveButton("ОК") { dialog, which -> dialog.dismiss() }
                         .create()
                     builder.show()
                 }
-                .setNeutralButton("Нет") {dialog, which -> dialog.dismiss()}
+                .setNeutralButton("Нет") { dialog, which -> dialog.dismiss() }
                 .create()
             alertBuilder.show()
         }
 
+        productsLV.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val product = catalog.products[position]
+
+                val alertBuilder = AlertDialog.Builder(this)
+                    .setTitle("Покупка")
+                    .setMessage("Вы собираетесь купить ${product.name}?")
+                    .setPositiveButton("Да") { dialog, which ->
+                        dialog.dismiss()
+                        product.selled++
+                        spentMoney += product.price
+                        val builder = AlertDialog.Builder(this)
+                            .setTitle("Поздравляем! 🎉")
+                            .setMessage("Вы приобрели ${product.name} за ${product.price} рублей.")
+                            .setPositiveButton("ОК") { dialog, which -> dialog.dismiss() }
+                            .create()
+                        builder.show()
+                    }
+                    .setNegativeButton("Нет") { dialog, which -> dialog.dismiss() }
+                    .create()
+                alertBuilder.show()
+            }
 
 
-//        statisticBTN.setOnClickListener {
-//            val intent = Intent(this, StatisticActivity::class.java)
-//            startActivity(intent)
-//        }
-
+        statisticBTN.setOnClickListener {
+            val intent = Intent(this, StatisticActivity::class.java)
+            intent.putExtra("catalog", catalog)
+            intent.putExtra("spentMoney", spentMoney)
+            startActivity(intent)
+        }
 
 
     }

@@ -4,4 +4,6 @@
     <string name="btn_exit">Выйти</string>
     <string name="tv_choose_product">Выберите товар</string>
     <string name="btn_statistic">Статистика продаж</string>
+    <string name="tv_statistic_header">Статистика продаж</string>
+    <string name="btn_back">Назад</string>
 </resources>

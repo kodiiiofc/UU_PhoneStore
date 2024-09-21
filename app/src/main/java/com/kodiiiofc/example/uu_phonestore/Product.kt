@@ -1,6 +1,8 @@
 package com.kodiiiofc.example.uu_phonestore
 
-data class Product(val name: String, var price: Int, var selled: Int = 0) {
+import java.io.Serializable
+
+data class Product(val name: String, var price: Int, var selled: Int = 0) : Serializable {
     override fun toString(): String {
         return "$name. \nЦена: $price руб."
     }
