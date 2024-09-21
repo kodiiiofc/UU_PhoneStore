@@ -2,21 +2,18 @@ package com.kodiiiofc.example.uu_phonestore
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Adapter
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import android.widget.Spinner
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.get
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var choosingCitySpinner: Spinner
+    private lateinit var choosingCityListView: ListView
     private lateinit var exitBTN: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,17 +21,18 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        choosingCitySpinner = findViewById(R.id.spinner_choosing_city)
-        ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_item).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            choosingCitySpinner.adapter = adapter
-        }
+        choosingCityListView = findViewById(R.id.lv_choosing_city)
+        val arrayAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.cities,
+            android.R.layout.simple_list_item_1
+        )
 
-        choosingCitySpinner.onItemClickListener = AdapterView.OnItemClickListener {
-            parent, view, position, id ->
+        choosingCityListView.adapter = arrayAdapter
+
+        choosingCityListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, CatalogActivity::class.java)
-            val city = parent.getItemAtPosition(position).toString()
-            intent.putExtra("City", city)
+            intent.putExtra("city", parent.getItemAtPosition(position).toString())
             startActivity(intent)
         }
 

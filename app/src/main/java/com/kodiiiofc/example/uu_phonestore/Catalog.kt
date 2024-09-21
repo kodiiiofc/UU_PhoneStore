@@ -3,7 +3,8 @@ package com.kodiiiofc.example.uu_phonestore
 class Catalog(
     val city: String,
     val baseProductList: List<Product>,
-    var multiplyingFactor: Double = 1.0
+    var multiplyingFactor: Double = 1.0,
+    var hasRepairService: Boolean = false
 ) {
 
     var products: List<Product> = listOf()
